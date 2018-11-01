@@ -7,13 +7,13 @@
     <!-- <link rel="stylesheet" href="app.css"> -->
   </head>
   <body>
-
-      Movie Title: <input type="text" class="input1" id="title" name = "title" placeholder="Movie Title"><br>
-      Genre: <input type="text" class="input1" id="genre" name="genre" placeholder="Genre"><br>
-      Production Year: <input type="text" class="input1" id="year" name ="year" pattern="\d*" maxlength="4" placeholder="YYYY"><br>
-      Imdb Score: <input type="number" class="input1" id="score" name="score" placeholder="1.0" step="0.1" min="0" max="10"><br>
+      Movie Title: <input type="text" class="input1" id="title" name = "title" placeholder="Movie Title" onfocus="this.value=''"><br>
+      Genre: <input type="text" class="input1" id="genre" name="genre" placeholder="Genre" onfocus="this.value=''"><br>
+      Production Year: <input type="text" class="input1" id="year" name ="year" pattern="\d*" maxlength="4" placeholder="YYYY" onfocus="this.value=''"><br>
+      Imdb Score: <input type="number" class="input1" id="score" name="score" placeholder="1.0" step="0.1" min="0" max="10" onfocus="this.value=''"><br>
       <button class="add-text-btn">Add Movie</button>
       <button class="clear-cache-btn">Clear Entries</button>
+      <button class="update-movie">Update Movie</button>
 
     <h1>Movies To Watch </h1>
     <div class="show-text">
@@ -29,5 +29,8 @@
       </table>
     </div>
     <h1>Watched These</h1>
+    <div id="watchedItems">
+
+    </div>
   </body>
 </html>
