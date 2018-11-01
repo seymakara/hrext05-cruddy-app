@@ -4,12 +4,30 @@
     <title>HREXT05 Cruddy App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
-    <link rel="stylesheet" href="app.css">
+    <!-- <link rel="stylesheet" href="app.css"> -->
   </head>
   <body>
-    <input type="text" class="text-input" id="theKey" placeholder="Enter some text">
-    <button class="add-text-btn">Add text</button>
-    <button class="clear-cache-btn">Clear Entries</button>
-    <div class="show-text"></div>
+
+      Movie Title: <input type="text" class="input1" id="title" name = "title" placeholder="Movie Title"><br>
+      Genre: <input type="text" class="input1" id="genre" name="genre" placeholder="Genre"><br>
+      Production Year: <input type="text" class="input1" id="year" name ="year" pattern="\d*" maxlength="4" placeholder="YYYY"><br>
+      Imdb Score: <input type="number" class="input1" id="score" name="score" placeholder="1.0" step="0.1" min="0" max="10"><br>
+      <button class="add-text-btn">Add Movie</button>
+      <button class="clear-cache-btn">Clear Entries</button>
+
+    <h1>Movies To Watch </h1>
+    <div class="show-text">
+      <table style="width:50%" id="toWatchTable">
+        <tr>
+          <th>Movie Title</th>
+          <th>Genre</th> 
+          <th>Year</th>
+          <th>Imdb Score</th>
+          <th>Watched it?</th>
+          <th>Edit / Delete</th>
+        </tr>
+      </table>
+    </div>
+    <h1>Watched These</h1>
   </body>
 </html>
