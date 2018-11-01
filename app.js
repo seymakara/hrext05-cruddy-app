@@ -10,6 +10,11 @@ $(document).ready(function(){
     }
   }
 
+  var deleteItem = function(item){
+      localStorage.removeItem(item);
+      refreshWatchTable();
+  }
+
 
   
   refreshWatchTable();
@@ -48,8 +53,9 @@ $(document).ready(function(){
   $(document).on('click',".deleteButton", function(){
     console.log(event)
     console.log("eventsrc", localStorage[event.srcElement.id])
-    console.log("editkeyValue1", editKeyValue)
-    localStorage.removeItem(event.srcElement.id);
+    // console.log("editkeyValue1", editKeyValue)
+    deleteItem(event.srcElement.id)
+    // localStorage.removeItem(event.srcElement.id);
 
     refreshWatchTable();
 
@@ -58,16 +64,17 @@ $(document).ready(function(){
 
   var valueToEdit;
   var editArray = []
-  var editKeyValue;
+  // var editKeyValue;
 
 
   $(document).on('click',".update-movie", function(){
 
     // console.log("before ", localStorage[valueToEdit])
     
-    
+    deleteItem(valueToEdit)
+
     var editTitleValue = $('#title').val(); // reading from <input>
-    // editKeyValue = editTitleValue; // change to dynamic key?
+    var editKeyValue = editTitleValue; // change to dynamic key?
     // console.log("editKeyValue2", editKeyValue)
     var editGenreValue = $('#genre').val();
     var editYearValue = $('#year').val();
@@ -80,7 +87,7 @@ $(document).ready(function(){
     
     // console.log("editArray ", editArray)
 
-    localStorage.setItem(valueToEdit, JSON.stringify(editArray))
+    localStorage.setItem(editKeyValue, JSON.stringify(editArray))
     
 
     editArray = []
