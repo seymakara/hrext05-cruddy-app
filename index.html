@@ -4,41 +4,48 @@
     <title>HREXT05 Cruddy App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
-    <!-- <link rel="stylesheet" href="app.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-      Movie Title: <input type="text" class="input1" id="title" name = "title" placeholder="Movie Title" onfocus="this.value=''"><br>
-      Genre: <input type="text" class="input1" id="genre" name="genre" placeholder="Genre" onfocus="this.value=''"><br>
-      Production Year: <input type="text" class="input1" id="year" name ="year" pattern="\d*" maxlength="4" placeholder="YYYY" onfocus="this.value=''"><br>
-      Imdb Score: <input type="number" class="input1" id="score" name="score" placeholder="1.0" step="0.1" min="0" max="10" onfocus="this.value=''"><br>
-      <button class="add-text-btn">Add Movie</button>
-      <button class="clear-cache-btn">Clear Entries</button>
-      <button class="update-movie">Update Movie</button>
+    <div id="wrapper">
+      <h1>MY MOVIE LOG</h1>
+      <div class="form-group" id="input-area">
+        <label>Movie Title:  <input type="text" class="form-control" id="title" name = "title" placeholder="Movie Title" onfocus="this.value=''"></label>
+        <label>Genre: <input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" onfocus="this.value=''"></label>
+        <label>Production Year: <input type="text" class="form-control" id="year" name ="year" pattern="\d*" maxlength="4" placeholder="YYYY" onfocus="this.value=''"></label>
+        <label>Imdb Score: <input type="number" class="form-control" id="score" name="score" placeholder="1.0" step="0.1" min="0" max="10" onfocus="this.value=''"></label><br>
+        <button class="btn btn-primary" id="add-text-btn">Add Movie</button>
+        <button class="btn btn-primary" id="clear-cache-btn">Clear Entries</button>
+        <button class="btn btn-primary" id="update-movie">Update Movie</button>
+      </div>
 
-    <h1>Movies To Watch </h1>
-    <div class="show-text">
-      <table style="width:50%" id="toWatchTable">
-        <tr>
-          <th>Movie Title</th>
-          <th>Genre</th> 
-          <th>Year</th>
-          <th>Imdb Score</th>
-          <th>Watched it?</th>
-          <th>Edit / Delete</th>
-        </tr>
-      </table>
-    </div>
-    <h1>Watched These</h1>
-    <div>
-        <table style="width:50%" id="watchedItems">
+      <div id="show-text1">
+        <h2>Movies To Watch </h2>
+        <table style="width:60%" id="toWatchTable">
           <tr>
-            <th>Movie Title</th>
-            <th>Genre</th> 
-            <th>Year</th>
-            <th>My Score</th>
-            <th>Watched it?</th>
+            <th scope="col">Movie Title</th>
+            <th scope="col">Genre</th> 
+            <th scope="col">Year</th>
+            <th scope="col">Imdb Score</th>
+            <th scope="col">Watched it?</th>
+            <th scope="col">Edit / Delete</th>
           </tr>
         </table>
+      </div>
+      
+      <div id="show-text2">
+        <h2>Watched These</h2>
+        <table style="width:60%" id="watchedItems">
+          <tr>
+            <th scope="col">Movie Title</th>
+            <th scope="col">Genre</th> 
+            <th scope="col">Year</th>
+            <th scope="col">My Score</th>
+            <th scope="col">Watched it?</th>
+          </tr>
+        </table>
+      </div>
     </div>
   </body>
 </html>

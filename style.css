@@ -1,0 +1,22 @@
+/* #show-text1, #show-text2{
+    display: inline-block;
+} */
+
+#wrapper{
+    padding: 40px;
+}
+
+#show-text1{
+    margin-top : 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+#show-text2{
+    margin: 20px;
+}
+
+#input-area{
+    padding: 15px;
+}

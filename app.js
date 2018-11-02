@@ -1,6 +1,5 @@
 $(document).ready(function(){
   
-  
   var refreshWatchTable = function(){
     $("#toWatchTable td").empty();
     $("#watchedItems td").empty();
@@ -9,14 +8,14 @@ $(document).ready(function(){
       // console.log("movie", movie)
       if(movie[4] === true){
         if(movie[5]=== undefined){
-          $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td><input type="number" class="myScore" name="myScore" placeholder='1.0' min='0' max='10' onfocus="this.value=''"><button class="addMyScore" id ='${movie[0]}'>Add My Score</button></td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+          $("#watchedItems").append(`<tr><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td><input type="number" class="myScore" name="myScore" placeholder='1.0' min='0' max='10' onfocus="this.value=''"><button class="addMyScore" id ='${movie[0]}'>Add My Score</button></td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
         }
         else{
-          $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[5]}</td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+          $("#watchedItems").append(`<tr><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[5]}</td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
         }
       }
       else if(movie[4] === false){
-        $("#toWatchTable").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'yesButton' id ='${movie[0]}'>Yes</button></td><td><button class = 'editButton' id ='${movie[0]}'>Edit</button><button class = 'deleteButton' id ='${movie[0]}'>Delete</button></td></tr>`);
+        $("#toWatchTable").append(`<tr><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'yesButton' id ='${movie[0]}'>Yes</button></td><td><button class = 'editButton' id ='${movie[0]}'>Edit</button><button class = 'deleteButton' id ='${movie[0]}'>Delete</button></td></tr>`);
       }
     }
   }
@@ -26,17 +25,13 @@ $(document).ready(function(){
       refreshWatchTable();
   }
 
-
-  
   refreshWatchTable();
 
   var movieDetails = []
 
-  // add event listener
-  $(".add-text-btn").on("click", function(){
-    // $(".show-text").empty();
 
-    
+  $("#add-text-btn").on("click", function(){
+
     var curTitleValue = $('#title').val(); // reading from <input>
     var curKeyValue = curTitleValue; // change to dynamic key?
     var curGenreValue = $('#genre').val();
@@ -63,8 +58,8 @@ $(document).ready(function(){
   });
 
   $(document).on('click',".deleteButton", function(){
-    console.log(event)
-    console.log("eventsrc", localStorage[event.srcElement.id])
+    // console.log(event)
+    // console.log("eventsrc", localStorage[event.srcElement.id])
     // console.log("editkeyValue1", editKeyValue)
     deleteItem(event.srcElement.id)
     // localStorage.removeItem(event.srcElement.id);
@@ -79,9 +74,9 @@ $(document).ready(function(){
   // var editKeyValue;
 
 
-  $(document).on('click',".update-movie", function(){
+  $(document).on('click',"#update-movie", function(){
 
-    console.log("before ", localStorage[valueToEdit])
+    // console.log("before ", localStorage[valueToEdit])
     
     deleteItem(valueToEdit)
 
@@ -98,11 +93,10 @@ $(document).ready(function(){
     editArray.push(false)
 
     
-    console.log("editArray ", editArray)
+    // console.log("editArray ", editArray)
 
     localStorage.setItem(editKeyValue, JSON.stringify(editArray))
     
-
     editArray = []
 
     // console.log("after ", localStorage[valueToEdit])
@@ -119,7 +113,7 @@ $(document).ready(function(){
     // console.log("movieToEdit ", movieToEdit)
 
     valueToEdit = (movieToEdit[0])
-    console.log("valueToEdit", valueToEdit)
+    // console.log("valueToEdit", valueToEdit)
 
     $('#title').val(movieToEdit[0])
     $('#genre').val(movieToEdit[1]) 
@@ -131,50 +125,50 @@ $(document).ready(function(){
   });
 
   $(document).on('click',".yesButton", function(){
-    console.log(event)
+    // console.log(event)
     var itemToMove = event.srcElement.id
-    console.log("itemToMove ", itemToMove)
+    // console.log("itemToMove ", itemToMove)
     var movieToMove = JSON.parse(localStorage.getItem(itemToMove));
-    console.log("movieToMove ", movieToMove)
+    // console.log("movieToMove ", movieToMove)
     movieToMove[4] = true
     localStorage.setItem(itemToMove, JSON.stringify(movieToMove));
-    console.log("movieToMove2 ", movieToMove)
-    console.log("bok", localStorage.getItem(itemToMove))
+    // console.log("movieToMove2 ", movieToMove)
+    // console.log("bok", localStorage.getItem(itemToMove))
 
-    valueToMove= (movieToMove[0])
-    console.log("valueToMove", valueToMove)
+    // valueToMove= (movieToMove[0])
+    // console.log("valueToMove", valueToMove)
 
     refreshWatchTable();
 
   });
 
   $(document).on('click',".noButton", function(){
-    console.log(event)
+    // console.log(event)
     var itemToMove = event.srcElement.id
-    console.log("itemToMove ", itemToMove)
+    // console.log("itemToMove ", itemToMove)
     var movieToMove = JSON.parse(localStorage.getItem(itemToMove));
-    console.log("movieToMove ", movieToMove)
+    // console.log("movieToMove ", movieToMove)
     movieToMove[4] = false
     localStorage.setItem(itemToMove, JSON.stringify(movieToMove));
-    console.log("movieToMove2 ", movieToMove)
-    console.log("bok", localStorage.getItem(itemToMove))
+    // console.log("movieToMove2 ", movieToMove)
+    // console.log("bok", localStorage.getItem(itemToMove))
 
-    valueToMove= (movieToMove[0])
-    console.log("valueToMove", valueToMove)
+    // valueToMove= (movieToMove[0])
+    // console.log("valueToMove", valueToMove)
 
     refreshWatchTable();
 
   });
 
   $(document).on('click',".addMyScore", function(){
-    console.log("hello")
+    // console.log("hello")
     var myScoreValue = $('.myScore').val()
 
-    console.log(event)
+    // console.log(event)
     var itemOfMyScore = event.srcElement.id
-    console.log("itemOfMyScore ", itemOfMyScore)
+    // console.log("itemOfMyScore ", itemOfMyScore)
     var movieOfMyScore = JSON.parse(localStorage.getItem(itemOfMyScore));
-    console.log("movieOfMyScore ", movieOfMyScore)
+    // console.log("movieOfMyScore ", movieOfMyScore)
     movieOfMyScore[5] = myScoreValue
     localStorage.setItem(itemOfMyScore, JSON.stringify(movieOfMyScore));
 
@@ -185,10 +179,7 @@ $(document).ready(function(){
 
   console.log("after\n", window.localStorage);
 
-
-
-
-  $(".clear-cache-btn").on("click", function(){
+  $("#clear-cache-btn").on("click", function(){
     // clear local storage
     localStorage.clear();
     refreshWatchTable()
