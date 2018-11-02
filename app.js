@@ -3,10 +3,16 @@ $(document).ready(function(){
   
   var refreshWatchTable = function(){
     $("#toWatchTable td").empty();
+    $("#watchedItems td").empty();
     for (var i = 0; i < localStorage.length; i++){
       var movie = JSON.parse(localStorage.getItem(localStorage.key(i)));
       // console.log("movie", movie)
-      $("#toWatchTable").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'yesButton'>Yes</button></td><td><button class = 'editButton' id ='${movie[0]}'>Edit</button><button class = 'deleteButton' id ='${movie[0]}'>Delete</button></td></tr>`);
+      if(movie[4] === true){
+        $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+      }
+      else if(movie[4] === false){
+        $("#toWatchTable").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'yesButton' id ='${movie[0]}'>Yes</button></td><td><button class = 'editButton' id ='${movie[0]}'>Edit</button><button class = 'deleteButton' id ='${movie[0]}'>Delete</button></td></tr>`);
+      }
     }
   }
 
@@ -39,8 +45,9 @@ $(document).ready(function(){
     movieDetails.push(curGenreValue)
     movieDetails.push(curYearValue)
     movieDetails.push(curScoreValue)
+    movieDetails.push(false)
 
-    // console.log("movieDetails", movieDetails)
+    console.log("movieDetails", movieDetails)
     
     localStorage.setItem(curKeyValue, JSON.stringify(movieDetails));
     
@@ -75,7 +82,6 @@ $(document).ready(function(){
 
     var editTitleValue = $('#title').val(); // reading from <input>
     var editKeyValue = editTitleValue; // change to dynamic key?
-    // console.log("editKeyValue2", editKeyValue)
     var editGenreValue = $('#genre').val();
     var editYearValue = $('#year').val();
     var editScoreValue = $('#score').val();
@@ -117,6 +123,42 @@ $(document).ready(function(){
 
   });
 
+  $(document).on('click',".yesButton", function(){
+    console.log(event)
+    var itemToMove = event.srcElement.id
+    console.log("itemToMove ", itemToMove)
+    var movieToMove = JSON.parse(localStorage.getItem(itemToMove));
+    console.log("movieToMove ", movieToMove)
+    movieToMove[4] = true
+    localStorage.setItem(itemToMove, JSON.stringify(movieToMove));
+    console.log("movieToMove2 ", movieToMove)
+    console.log("bok", localStorage.getItem(itemToMove))
+
+    valueToMove= (movieToMove[0])
+    console.log("valueToMove", valueToMove)
+
+    refreshWatchTable();
+
+  });
+
+  $(document).on('click',".noButton", function(){
+    console.log(event)
+    var itemToMove = event.srcElement.id
+    console.log("itemToMove ", itemToMove)
+    var movieToMove = JSON.parse(localStorage.getItem(itemToMove));
+    console.log("movieToMove ", movieToMove)
+    movieToMove[4] = false
+    localStorage.setItem(itemToMove, JSON.stringify(movieToMove));
+    console.log("movieToMove2 ", movieToMove)
+    console.log("bok", localStorage.getItem(itemToMove))
+
+    valueToMove= (movieToMove[0])
+    console.log("valueToMove", valueToMove)
+
+    refreshWatchTable();
+
+  });
+
 
   console.log("after\n", window.localStorage);
 
@@ -126,6 +168,7 @@ $(document).ready(function(){
   $(".clear-cache-btn").on("click", function(){
     // clear local storage
     localStorage.clear();
+    refreshWatchTable()
   });
 
 });
