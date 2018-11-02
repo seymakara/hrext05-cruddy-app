@@ -8,7 +8,12 @@ $(document).ready(function(){
       var movie = JSON.parse(localStorage.getItem(localStorage.key(i)));
       // console.log("movie", movie)
       if(movie[4] === true){
-        $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+        if(movie[5]=== undefined){
+          $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td><input type="number" class="myScore" name="myScore" placeholder='1.0' min='0' max='10' onfocus="this.value=''"><button class="addMyScore" id ='${movie[0]}'>Add My Score</button></td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+        }
+        else{
+          $("#watchedItems").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[5]}</td><td><button class = 'noButton' id ='${movie[0]}'>No</button></td></tr>`);
+        }
       }
       else if(movie[4] === false){
         $("#toWatchTable").append(`<tr align = 'middle' ><td>${movie[0]}</td><td>${movie[1]}</td><td>${movie[2]}</td><td>${movie[3]}</td><td><button class = 'yesButton' id ='${movie[0]}'>Yes</button></td><td><button class = 'editButton' id ='${movie[0]}'>Edit</button><button class = 'deleteButton' id ='${movie[0]}'>Delete</button></td></tr>`);
@@ -76,7 +81,7 @@ $(document).ready(function(){
 
   $(document).on('click',".update-movie", function(){
 
-    // console.log("before ", localStorage[valueToEdit])
+    console.log("before ", localStorage[valueToEdit])
     
     deleteItem(valueToEdit)
 
@@ -90,8 +95,10 @@ $(document).ready(function(){
     editArray.push(editGenreValue)
     editArray.push(editYearValue)
     editArray.push(editScoreValue)
+    editArray.push(false)
+
     
-    // console.log("editArray ", editArray)
+    console.log("editArray ", editArray)
 
     localStorage.setItem(editKeyValue, JSON.stringify(editArray))
     
@@ -154,6 +161,22 @@ $(document).ready(function(){
 
     valueToMove= (movieToMove[0])
     console.log("valueToMove", valueToMove)
+
+    refreshWatchTable();
+
+  });
+
+  $(document).on('click',".addMyScore", function(){
+    console.log("hello")
+    var myScoreValue = $('.myScore').val()
+
+    console.log(event)
+    var itemOfMyScore = event.srcElement.id
+    console.log("itemOfMyScore ", itemOfMyScore)
+    var movieOfMyScore = JSON.parse(localStorage.getItem(itemOfMyScore));
+    console.log("movieOfMyScore ", movieOfMyScore)
+    movieOfMyScore[5] = myScoreValue
+    localStorage.setItem(itemOfMyScore, JSON.stringify(movieOfMyScore));
 
     refreshWatchTable();
 
